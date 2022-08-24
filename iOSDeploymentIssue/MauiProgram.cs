@@ -1,4 +1,7 @@
-﻿namespace iOSDeploymentIssue;
+﻿using iOSDeploymentIssue.Database;
+using iOSDeploymentIssue.ViewModels;
+
+namespace iOSDeploymentIssue;
 
 public static class MauiProgram
 {
@@ -13,6 +16,22 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 
-		return builder.Build();
+        var dbPath = Path.Combine(FileSystem.AppDataDirectory, "logbook.db");
+
+        builder.Services.AddTransient(x =>
+        {
+            
+            var db = new EntityDbContext(dbPath);
+            db.Database.EnsureCreated();
+
+            return db;
+        });
+
+
+        builder.Services.AddTransient<MainPageViewModel>();
+
+        builder.Services.AddSingleton<MainPage>();
+
+        return builder.Build();
 	}
 }

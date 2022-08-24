@@ -1,4 +1,5 @@
 ﻿using iOSDeploymentIssue.Database;
+using iOSDeploymentIssue.ViewModels;
 
 namespace iOSDeploymentIssue;
 
@@ -6,12 +7,11 @@ public partial class MainPage : ContentPage
 {
 	int count = 0;
 
-    public MainPage()
+    public MainPage(MainPageViewModel viewModel)
     {
         InitializeComponent();
 
-        var dbPath = Path.Combine(FileSystem.AppDataDirectory, "logbook.db");
-        var db = new EntityDbContext(dbPath);
+        BindingContext = viewModel;
 
     }
 

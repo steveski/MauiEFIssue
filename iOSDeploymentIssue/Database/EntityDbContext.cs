@@ -10,12 +10,10 @@ public class EntityDbContext : DbContext
     public EntityDbContext()
 #pragma warning restore CS8618
     {
-        //SQLitePCL.Batteries_V2.Init();
     }
 
     public EntityDbContext(string dbPath)
     {
-        //SQLitePCL.Batteries_V2.Init();
         _dbPath = dbPath;
     }
 
@@ -32,4 +30,5 @@ public class EntityDbContext : DbContext
 
         base.OnModelCreating(modelBuilder);
     }
+
 }
